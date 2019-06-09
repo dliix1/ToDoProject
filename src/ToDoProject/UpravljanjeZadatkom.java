@@ -1,6 +1,9 @@
 package ToDoProject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class UpravljanjeZadatkom {
@@ -16,11 +19,13 @@ public class UpravljanjeZadatkom {
 		boolean statusZadatka = unos.nextBoolean();
 		
 		System.out.println("Unesite ime vlasnika zadatka; ");
-		String imeVlasnika = unos.next();
+		String imeVlasnika = unos.nextLine();
 		
 		System.out.println("Unesite datum kreiranja; ");
+		DateFormat datum = new SimpleDateFormat ("dd-MM-yyyy");
+		String datumKreiranja = unos.nextLine();
 
-		new Zadatak(opisZadatka, statusZadatka);
+		new Zadatak(opisZadatka, statusZadatka, imeVlasnika, datumKreiranjaZadatka);
 
 	}
 
