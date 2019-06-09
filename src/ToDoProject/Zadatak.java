@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Zadatak {
 
-	private String opisZadatka;
-	private boolean statusZadatka;
-	private String imeVlasnika;
-	private Date datumIVrijemeKreranja;
+	public String opisZadatka;
+	public boolean statusZadatka;
+	public String imeVlasnika;
+	public Date datumIVrijemeKreranja;
 
 	Zadatak() {
 

@@ -1,6 +1,7 @@
 package ToDoProject;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,21 +12,24 @@ public class UpravljanjeZadatkom {
 	ArrayList<UpravljanjeZadatkom> zadaci = new ArrayList<UpravljanjeZadatkom>();
 	Scanner unos = new Scanner(System.in);
 
-	public void kreiranjeNovogZadatka(ArrayList<UpravljanjeZadatkom> zadaci) {
+	public void kreiranjeNovogZadatka(ArrayList<UpravljanjeZadatkom> zadaci)
+			throws ParseException {
 		System.out.println("Unesite opis zadatka; ");
 		String opisZadatka = unos.nextLine();
 
 		System.out.println("Unesite status zadatka; ");
 		boolean statusZadatka = unos.nextBoolean();
-		
+
 		System.out.println("Unesite ime vlasnika zadatka; ");
 		String imeVlasnika = unos.nextLine();
-		
-		System.out.println("Unesite datum kreiranja; ");
-		DateFormat datum = new SimpleDateFormat ("dd-MM-yyyy");
-		String datumKreiranja = unos.nextLine();
 
-		new Zadatak(opisZadatka, statusZadatka, imeVlasnika, datumKreiranjaZadatka);
+		System.out.println("Unesite datum kreiranja; ");
+		DateFormat datum = new SimpleDateFormat("dd-MM-yyyy");
+		String datumKreiranjaString = unos.nextLine();
+		Date datumKreiranjaZadatka = datum.parse(datumKreiranjaString);
+
+		new Zadatak(opisZadatka, statusZadatka, imeVlasnika,
+				datumKreiranjaZadatka);
 
 	}
 
@@ -64,7 +68,7 @@ public class UpravljanjeZadatkom {
 
 		if (zadaci.size() == 0) {
 			System.out.println("Lista je prazna.");
-			
+
 		} else {
 			for (int i = 0; i < zadaci.size(); i++) {
 				System.out.println((i + 1) + " " + zadaci.get(i));
