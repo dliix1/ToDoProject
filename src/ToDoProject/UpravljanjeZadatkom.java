@@ -12,21 +12,23 @@ public class UpravljanjeZadatkom {
 	ArrayList<UpravljanjeZadatkom> zadaci = new ArrayList<UpravljanjeZadatkom>();
 	Scanner unos = new Scanner(System.in);
 
-	public void kreiranjeNovogZadatka(ArrayList<UpravljanjeZadatkom> zadaci)
-			throws ParseException {
+	public void kreiranjeNovogZadatka(String opisZadatka,
+			boolean statusZadatka, String imeVlasnika,
+			Date datumKreiranjaZadatka, ArrayList<UpravljanjeZadatkom> zadaci) {
+		
 		System.out.println("Unesite opis zadatka; ");
-		String opisZadatka = unos.nextLine();
+		opisZadatka = unos.nextLine();
 
 		System.out.println("Unesite status zadatka; ");
-		boolean statusZadatka = unos.nextBoolean();
+		statusZadatka = unos.nextBoolean();
 
 		System.out.println("Unesite ime vlasnika zadatka; ");
-		String imeVlasnika = unos.nextLine();
+		imeVlasnika = unos.nextLine();
 
 		System.out.println("Unesite datum kreiranja; ");
-		DateFormat datum = new SimpleDateFormat("dd-MM-yyyy");
-		String datumKreiranjaString = unos.nextLine();
-		Date datumKreiranjaZadatka = datum.parse(datumKreiranjaString);
+		DateFormat noviDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String datumKreiranja = noviDateFormat
+				.format(datumKreiranjaZadatka);
 
 		new Zadatak(opisZadatka, statusZadatka, imeVlasnika,
 				datumKreiranjaZadatka);
@@ -64,16 +66,30 @@ public class UpravljanjeZadatkom {
 		}
 	}
 
-	public void ispisSvihZadataka(ArrayList<UpravljanjeZadatkom> zadaci) {
-
-		if (zadaci.size() == 0) {
-			System.out.println("Lista je prazna.");
-
-		} else {
-			for (int i = 0; i < zadaci.size(); i++) {
-				System.out.println((i + 1) + " " + zadaci.get(i));
-			}
+	public void editovanjeZadatka(int brojZadatka, String editovaniTekst,
+			ArrayList<Zadatak> adaci) {
+		if (zadaci.size() > 0) {
+			zadaci.get(brojZadatka - 1).setOpisZadatka(editovaniTekst);
 		}
 	}
 
+	public void setOpisZadatka(String editovaniTekst) {
+	}
+
+	public void brisanjeZadatka(int brojZadatka, ArrayList<Zadatak> zadaci) {
+		if (zadaci.size() != 0) {
+			zadaci.remove(brojZadatka - 1);
+			System.out.println("Zadatak je izbrisan.");
+		}
+	}
+
+	public void izlistavanjeZadataka(ArrayList<Zadatak> zadaci) {
+		for (int i = 0; i < zadaci.size(); i++) {
+			System.out.println((i + 1) + ". Ime vlasnika: "
+					+ zadaci.get(i).getImeVlasnika() + ", opis zadatka: "
+					+ zadaci.get(i).getOpisZadatka()
+					+ ", datum i vrijeme kreiranja zadatka:  "
+					+ zadaci.get(i).getDatumIVrijemeKreranja());
+		}
+	}
 }
